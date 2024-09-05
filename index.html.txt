@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Тестовая страница</title>
+</head>
+<body>
+    <h1>Привет!</h1>
+    <button onclick="openApp()">Открыть приложение</button>
+
+    <script>
+        function openApp() {
+            var appSchemeUrl = 'myapp://'; // Схема URL вашего приложения
+            var appStoreUrl = 'https://apps.apple.com/app/idYOUR_APP_ID'; // Ссылка на App Store
+            var playStoreUrl = 'https://play.google.com/store/apps/details?id=YOUR_APP_PACKAGE'; // Ссылка на Google Play
+
+            var iframe = document.createElement('iframe');
+            iframe.style.display = 'none';
+            iframe.src = appSchemeUrl;
+            document.body.appendChild(iframe);
+
+            setTimeout(function() {
+                window.location = appStoreUrl; // Замените на playStoreUrl для Android
+            }, 2000); // 2 секунды для попытки открытия приложения
+        }
+    </script>
+</body>
+</html>
