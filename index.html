@@ -15,27 +15,32 @@
             var appSchemeUrl = 'myapp://etmmobile'; // Ваша URL-схема
             var appStoreUrl = 'https://apps.apple.com/app/id1567907246'; // Ссылка на App Store для iOS
             var playStoreUrl = 'https://play.google.com/store/apps/details?id=com.ipro.etm'; // Ссылка на Google Play для Android
+
             // Проверяем, Android это или iOS
             var isAndroid = /android/i.test(userAgent);
             var isiOS = /iPad|iPhone|iPod/.test(userAgent) && !window.MSStream;
 
+            var storeUrl;
             if (isiOS) {
-                // Для iOS
-                var appStoreUrl = appStoreUrl;
-                window.location.href = appSchemeUrl; // Ваша схема URL
-                setTimeout(function() {
-                    window.location.href = appStoreUrl;
-                }, 2000);
+                storeUrl = appStoreUrl; // Ссылка на App Store для iOS
             } else if (isAndroid) {
-                // Для Android
-                var playStoreUrl = playStoreUrl;
-                window.location.href = appSchemeUrl; // Ваша схема URL
-                setTimeout(function() {
-                    window.location.href = playStoreUrl;
-                }, 2000);
+                storeUrl = playStoreUrl; // Ссылка на Google Play для Android
             } else {
                 alert('Это устройство не поддерживается');
+                return;
             }
+
+            // Создаем скрытый iframe для попытки открытия приложения
+            var iframe = document.createElement('iframe');
+            iframe.style.display = 'none';
+            iframe.src = appSchemeUrl;
+            document.body.appendChild(iframe);
+
+            // Устанавливаем таймер для перенаправления в магазин приложений
+            setTimeout(function() {
+                document.body.removeChild(iframe); // Удаляем iframe
+                window.location.href = storeUrl; // Перенаправляем в App Store или Google Play
+            }, 1000); // 1 секунда ожидания
         }
     </script>
 </body>
