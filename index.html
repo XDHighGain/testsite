@@ -7,7 +7,7 @@
 </head>
 <body>
     <h1>Нажмите кнопку, чтобы открыть приложение</h1>
-    <button onclick="openApp()">Открыть приложение 11</button>
+    <button onclick="openApp()">Открыть приложение 12</button>
 
     <script>
         function openApp() {
@@ -32,11 +32,11 @@
                 var iframe = document.createElement('iframe');
                 iframe.style.display = 'none';
                 iframe.src = appSchemeUrl;
-
+                document.body.appendChild(iframe);
                 // Обработчик события, когда iframe загружен
                 iframe.onload = function() {
                     //alert('Попытка открытия приложения через URL-схему прошла успешно.')
-                    document.body.appendChild(iframe);
+                    
                 };
                 iframe.onerror = function() {
                    // alert('Попытка открытия приложения через URL-схему провалилась, щас откроем стор')
