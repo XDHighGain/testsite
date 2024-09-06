@@ -12,22 +12,24 @@
     <script>
         function openApp() {
             var userAgent = navigator.userAgent || navigator.vendor || window.opera;
-
+            var appSchemeUrl = 'myapp://etmmobile'; // Ваша URL-схема
+            var appStoreUrl = 'https://apps.apple.com/app/id1567907246'; // Ссылка на App Store для iOS
+            var playStoreUrl = 'https://play.google.com/store/apps/details?id=com.ipro.etm'; // Ссылка на Google Play для Android
             // Проверяем, Android это или iOS
             var isAndroid = /android/i.test(userAgent);
             var isiOS = /iPad|iPhone|iPod/.test(userAgent) && !window.MSStream;
 
             if (isiOS) {
                 // Для iOS
-                var appStoreUrl = 'https://apps.apple.com/app/idYOUR_APP_ID';
-                window.location.href = 'myapp://'; // Ваша схема URL
+                var appStoreUrl = appStoreUrl;
+                window.location.href = appSchemeUrl; // Ваша схема URL
                 setTimeout(function() {
                     window.location.href = appStoreUrl;
                 }, 2000);
             } else if (isAndroid) {
                 // Для Android
-                var playStoreUrl = 'https://play.google.com/store/apps/details?id=YOUR_APP_PACKAGE';
-                window.location.href = 'myapp://'; // Ваша схема URL
+                var playStoreUrl = playStoreUrl;
+                window.location.href = appSchemeUrl; // Ваша схема URL
                 setTimeout(function() {
                     window.location.href = playStoreUrl;
                 }, 2000);
