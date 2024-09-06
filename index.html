@@ -35,16 +35,18 @@
 
                 // Обработчик события, когда iframe загружен
                 iframe.onload = function() {
-                    console.log('Попытка открытия приложения через URL-схему прошла успешно.');
+                   window.alert('Попытка открытия приложения через URL-схему прошла успешно.')
                 };
-
+                iframe.onabort = function() {
+                    window.alert('Попытка открытия приложения через URL-схему провалилась, щас откроем стор')
+                };
                 document.body.appendChild(iframe);
 
                 setTimeout(function() {
                     document.body.removeChild(iframe);
                     console.log('Не удалось открыть приложение, перенаправляем в магазин.');
                     window.location.href = storeUrl;
-                }, 1000); // 1 секунда ожидания
+                }, 4000); // 1 секунда ожидания
             } catch (e) {
                 console.error('Ошибка при попытке открытия приложения:', e);
             }
