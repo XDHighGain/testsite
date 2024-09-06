@@ -7,7 +7,7 @@
 </head>
 <body>
     <h1>Нажмите кнопку, чтобы открыть приложение</h1>
-    <button onclick="openApp()">Открыть приложение 14</button>
+    <button onclick="openApp()">Открыть приложение 15</button>
 
     <script>
         function openApp() {
@@ -28,11 +28,11 @@
                 return;
             }
 
-            var iframe = document.createElement('iframe');                
-            iframe.style.display = 'none';
+
             try {
                 
-
+            var iframe = document.createElement('iframe');                
+            iframe.style.display = 'none';
                 iframe.src = appSchemeUrl;
                 document.body.appendChild(iframe);
                 // Обработчик события, когда iframe загружен
