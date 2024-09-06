@@ -7,7 +7,7 @@
 </head>
 <body>
     <h1>Нажмите кнопку, чтобы открыть приложение</h1>
-    <button onclick="openApp()">Открыть приложение 15</button>
+    <button onclick="openApp()">Открыть приложение 16</button>
 
     <script>
         function openApp() {
@@ -37,13 +37,19 @@
                 document.body.appendChild(iframe);
                 // Обработчик события, когда iframe загружен
                 iframe.onload = function() {
-                    //alert('Попытка открытия приложения через URL-схему прошла успешно.')
+                    alert('Попытка открытия приложения через URL-схему прошла успешно. 1')
                     
                 };
                 iframe.onerror = function() {
                    // alert('Попытка открытия приложения через URL-схему провалилась, щас откроем стор')
-                   document.body.removeChild(iframe);
-                    alert('Не удалось открыть приложение, перенаправляем в магазин 1');
+                   //document.body.removeChild(iframe);
+                    alert('Не удалось открыть приложение, перенаправляем в магазин 2');
+                    //window.location.href = storeUrl;
+                };
+                iframe.onended = function() {
+                   // alert('Попытка открытия приложения через URL-схему провалилась, щас откроем стор')
+                   //document.body.removeChild(iframe);
+                    alert('Не удалось открыть приложение, перенаправляем в магазин 3');
                     //window.location.href = storeUrl;
                 };
                /* document.body.appendChild(iframe);
@@ -54,9 +60,9 @@
                     window.location.href = storeUrl;
                 }, 4000); // 1 секунда ожидания*/
             } catch (e) {
-                alert('Ошибка при попытке открытия приложения: 3', e);
-                document.body.removeChild(iframe);
-                    alert('Не удалось открыть приложение, перенаправляем в магазин 2');
+                alert('Ошибка при попытке открытия приложения: 4', e);
+                //document.body.removeChild(iframe);
+                alert('Не удалось открыть приложение, перенаправляем в магазин 5');
                     //window.location.href = storeUrl;
             }
         }
