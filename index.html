@@ -7,22 +7,38 @@
 </head>
 <body>
     <h1>Привет!</h1>
-    <button onclick="openApp()">Открыть приложение3</button>
+    <button onclick="openApp()">Открыть приложение5</button>
 
     <script>
+        function isMobile() {
+            return /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+        }
+
         function openApp() {
-            var appSchemeUrl = 'myapp://etmmobile';
-            var appStoreUrl = 'https://apps.apple.com/app/id1567907246'; // Ссылка на App Store
-            var playStoreUrl = 'https://play.google.com/store/apps/details?id=com.ipro.etm'; // Ссылка на Google Play
+            var appSchemeUrl = 'myapp://etmmobile'; // Ваша URL-схема
+            var appStoreUrl = 'https://apps.apple.com/app/id1567907246'; // Ссылка на App Store для iOS
+            var playStoreUrl = 'https://play.google.com/store/apps/details?id=com.ipro.etm'; // Ссылка на Google Play для Android
 
-            var iframe = document.createElement('iframe');
-            iframe.style.display = 'none';
-            iframe.src = appSchemeUrl;
-            document.body.appendChild(iframe);
+            if (isMobile()) {
+                if (/Android/i.test(navigator.userAgent)) {
+                    // Для Android используем Intent
+                    window.location = 'intent://etmmobile#Intent;scheme=myapp;package=com.ipro.etm;end';
+                } else if (/iPhone|iPad|iPod/i.test(navigator.userAgent)) {
+                    // Для iOS пробуем открыть через схему URL
+                    window.location = appSchemeUrl;
+                }
 
-            setTimeout(function() {
-                window.location = playStoreUrl; // Замените на playStoreUrl для Android
-            }, 2000); // 2 секунды для попытки открытия приложения
+                // Если приложение не установлено, то через 2 секунды переходим в магазин
+                setTimeout(function() {
+                    if (/Android/i.test(navigator.userAgent)) {
+                        window.location = playStoreUrl;
+                    } else {
+                        window.location = appStoreUrl;
+                    }
+                }, 2000);
+            } else {
+                alert("Откройте эту ссылку на мобильном устройстве");
+            }
         }
     </script>
 </body>
