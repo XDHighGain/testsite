@@ -7,7 +7,7 @@
 </head>
 <body>
     <h1>Нажмите кнопку, чтобы открыть приложение</h1>
-    <button onclick="openApp()">Открыть приложение 13</button>
+    <button onclick="openApp()">Открыть приложение 14</button>
 
     <script>
         function openApp() {
@@ -28,10 +28,11 @@
                 return;
             }
 
-            var iframe = document.createElement('iframe');
+            var iframe = document.createElement('iframe');                
+            iframe.style.display = 'none';
             try {
                 
-                iframe.style.display = 'none';
+
                 iframe.src = appSchemeUrl;
                 document.body.appendChild(iframe);
                 // Обработчик события, когда iframe загружен
@@ -42,7 +43,7 @@
                 iframe.onerror = function() {
                    // alert('Попытка открытия приложения через URL-схему провалилась, щас откроем стор')
                    document.body.removeChild(iframe);
-                    alert('Не удалось открыть приложение, перенаправляем в магазин.');
+                    alert('Не удалось открыть приложение, перенаправляем в магазин 1');
                     //window.location.href = storeUrl;
                 };
                /* document.body.appendChild(iframe);
@@ -53,10 +54,10 @@
                     window.location.href = storeUrl;
                 }, 4000); // 1 секунда ожидания*/
             } catch (e) {
-                alert('Ошибка при попытке открытия приложения:', e);
+                alert('Ошибка при попытке открытия приложения: 3', e);
                 document.body.removeChild(iframe);
-                    alert('Не удалось открыть приложение, перенаправляем в магазин.');
-                    window.location.href = storeUrl;
+                    alert('Не удалось открыть приложение, перенаправляем в магазин 2');
+                    //window.location.href = storeUrl;
             }
         }
     </script>
