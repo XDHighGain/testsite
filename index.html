@@ -13,7 +13,7 @@
         function openApp() {
             var appSchemeUrl = 'myapp://'; // Схема URL вашего приложения
             var appStoreUrl = 'https://apps.apple.com/app/id1567907246'; // Ссылка на App Store
-            var playStoreUrl = 'https://play.google.com/store/apps/details?id=YOUR_APP_PACKAGE'; // Ссылка на Google Play
+            var playStoreUrl = 'https://play.google.com/store/apps/details?id=com.ipro.etm'; // Ссылка на Google Play
 
             var iframe = document.createElement('iframe');
             iframe.style.display = 'none';
@@ -21,7 +21,7 @@
             document.body.appendChild(iframe);
 
             setTimeout(function() {
-                window.location = appStoreUrl; // Замените на playStoreUrl для Android
+                window.location = playStoreUrl; // Замените на playStoreUrl для Android
             }, 2000); // 2 секунды для попытки открытия приложения
         }
     </script>
