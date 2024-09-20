@@ -7,64 +7,36 @@
 </head>
 <body>
     <h1>Нажмите кнопку, чтобы открыть приложение</h1>
-    <button onclick="openApp()">Открыть приложение 16</button>
+    <button onclick="openApp()">Открыть приложение 111</button>
 
     <script>
         function openApp() {
             var userAgent = navigator.userAgent || navigator.vendor || window.opera;
 
-            var appSchemeUrl = 'myapp://etmmobile'; 
-            var appStoreUrl = 'https://apps.apple.com/app/id1567907246';
-            var playStoreUrl = 'https://play.google.com/store/apps/details?id=com.ipro.etm';
+            var appSchemeUrl = 'myapp://etmmobile' 
+            var appStoreUrl = 'https://apps.apple.com/app/id1567907246'
+            var playStoreUrl = 'https://play.google.com/store/apps/details?id=com.ipro.etm'
 
-            var isAndroid = /android/i.test(userAgent);
-            var isiOS = /iPad|iPhone|iPod/.test(userAgent) && !window.MSStream;
+            var isAndroid = /android/i.test(userAgent)
+            var isiOS = /iPad|iPhone|iPod/.test(userAgent) && !window.MSStream
 
-            var storeUrl;
-            if (isiOS) storeUrl = appStoreUrl;
-            else if (isAndroid) storeUrl = playStoreUrl;
+            var storeUrl
+            if (isiOS) storeUrl = appStoreUrl 
+            else if (isAndroid) storeUrl = playStoreUrl
             else {
                 alert('Это устройство не поддерживается');
                 return;
             }
 
-
-            try {
-                
-            var iframe = document.createElement('iframe');                
+            var iframe = document.createElement('iframe');
             iframe.style.display = 'none';
-                iframe.src = appSchemeUrl;
-                document.body.appendChild(iframe);
-                // Обработчик события, когда iframe загружен
-                iframe.onload = function() {
-                    alert('Попытка открытия приложения через URL-схему прошла успешно. 1')
-                    
-                };
-                iframe.onerror = function() {
-                   // alert('Попытка открытия приложения через URL-схему провалилась, щас откроем стор')
-                   //document.body.removeChild(iframe);
-                    alert('Не удалось открыть приложение, перенаправляем в магазин 2');
-                    //window.location.href = storeUrl;
-                };
-                iframe.onended = function() {
-                   // alert('Попытка открытия приложения через URL-схему провалилась, щас откроем стор')
-                   //document.body.removeChild(iframe);
-                    alert('Не удалось открыть приложение, перенаправляем в магазин 3');
-                    //window.location.href = storeUrl;
-                };
-               /* document.body.appendChild(iframe);
+            iframe.src = appSchemeUrl;
+            document.body.appendChild(iframe);
 
-                setTimeout(function() {
-                    document.body.removeChild(iframe);
-                    alert('Не удалось открыть приложение, перенаправляем в магазин.');
-                    window.location.href = storeUrl;
-                }, 4000); // 1 секунда ожидания*/
-            } catch (e) {
-                alert('Ошибка при попытке открытия приложения: 4', e);
-                //document.body.removeChild(iframe);
-                alert('Не удалось открыть приложение, перенаправляем в магазин 5');
-                    //window.location.href = storeUrl;
-            }
+            setTimeout(function() {
+                document.body.removeChild(iframe); 
+                window.location.href = storeUrl; 
+            }, 1000); 
         }
     </script>
 </body>
