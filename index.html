@@ -7,7 +7,7 @@
 </head>
 <body>
     <h1>Нажмите кнопку, чтобы открыть приложение</h1>
-    <button onclick="openApp()">Открыть приложение 111</button>
+    <button onclick="openApp()">Открыть приложение 222</button>
 
     <script>
         function openApp() {
@@ -28,13 +28,13 @@
                 return;
             }
 
-            var iframe = document.createElement('iframe');
+            /*var iframe = document.createElement('iframe');
             iframe.style.display = 'none';
             iframe.src = appSchemeUrl;
-            document.body.appendChild(iframe);
-
+            document.body.appendChild(iframe);*/
+            window.location.replace(appSchemeUrl)
             setTimeout(function() {
-                document.body.removeChild(iframe); 
+                //document.body.removeChild(iframe); 
                 window.location.href = storeUrl; 
             }, 1000); 
         }
