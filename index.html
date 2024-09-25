@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Открытие приложения 1</title>
+    <title>Открытие приложения</title>
 </head>
 <body>
-    <h1>Нажмите кнопку, чтобы открыть приложение</h1>
-    <button onclick="openApp()">Открыть приложение</button>
+    <h1>Нажмите кнопку, чтобы открыть приложение </h1>
+    <button onclick="openApp()">Открыть приложение 4</button>
 
     <script>
         function openApp() {
@@ -21,8 +21,11 @@
             var isiOS = /iPad|iPhone|iPod/.test(userAgent) && !window.MSStream;
 
             if (isiOS) {
-                // Попытка открыть универсальную ссылку
-                window.location.href = appSchemeUrl;
+                // Создаем скрытый iframe для открытия приложения
+                var iframe = document.createElement('iframe');
+                iframe.style.display = 'none';
+                iframe.src = appSchemeUrl;
+                document.body.appendChild(iframe);
 
                 // Отслеживаем изменение видимости документа
                 document.addEventListener('visibilitychange', function onVisibilityChange() {
@@ -36,8 +39,11 @@
                     }
                 });
             } else if (isAndroid) {
-                // Попытка открыть приложение по URL-схеме
-                window.location.href = appSchemeUrl;
+                // Создаем скрытый iframe для открытия приложения
+                var iframe = document.createElement('iframe');
+                iframe.style.display = 'none';
+                iframe.src = appSchemeUrl;
+                document.body.appendChild(iframe);
 
                 // Отслеживаем изменение видимости документа
                 document.addEventListener('visibilitychange', function onVisibilityChange() {
