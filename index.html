@@ -7,7 +7,7 @@
 </head>
 <body>
     <h1>Нажмите кнопку, чтобы открыть приложение</h1>
-    <button onclick="openApp()">Открыть приложение 81</button>
+    <button onclick="openApp()">Открыть приложение 82</button>
 
     <script>
         function openApp() {
@@ -24,7 +24,12 @@
                     window.location.href = appStoreUrl; // Перенаправление в App Store
                 }, 2000); // Увеличение времени ожидания для улучшения UX
 
+               try {
                 window.location.href = appLink; // Попытка открыть приложение
+               }
+               catch (e) {
+                alert('e', e)
+               }
 
                 document.addEventListener('visibilitychange', function() {
                     clearTimeout(timeout); // Очищаем таймер, если приложение открылось
