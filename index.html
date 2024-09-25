@@ -7,7 +7,7 @@
 </head>
 <body>
     <h1>Нажмите кнопку, чтобы открыть приложение</h1>
-    <button onclick="openApp()">Открыть приложение 222</button>
+    <button onclick="openApp()">Открыть приложение 2221</button>
 
     <script>
         function openApp() {
@@ -17,21 +17,39 @@
             var appStoreUrl = 'https://apps.apple.com/app/id1567907246'
             var playStoreUrl = 'https://play.google.com/store/apps/details?id=com.ipro.etm'
 
-            var isAndroid = /android/i.test(userAgent)
-            var isiOS = /iPad|iPhone|iPod/.test(userAgent) && !window.MSStream
+             // Проверка на iOS и Android
+             const isIOS = /iPhone|iPad|iPod/.test(navigator.userAgent);
+            const isAndroid = /Android/.test(navigator.userAgent);
 
-            var storeUrl
-            if (isiOS) storeUrl = appStoreUrl 
-            else if (isAndroid) storeUrl = playStoreUrl
-            else {
-                alert('Это устройство не поддерживается');
-                return;
+            if (isIOS) {
+                // Для iOS
+                const timeout = setTimeout(() => {
+                    window.location.href = appStoreUrl; // Перенаправление в App Store
+                }, 500); // Задержка перед редиректом
+
+                window.location.href = appLink; // Попытка открыть приложение
+
+                // Если приложение открывается, очистим таймер
+                window.addEventListener('pagehide', () => {
+                    clearTimeout(timeout);
+                });
+            } else if (isAndroid) {
+                // Для Android
+                const timeout = setTimeout(() => {
+                    window.location.href = playStoreUrl; // Перенаправление в Google Play
+                }, 500); // Задержка перед редиректом
+
+                window.location.href = appLink; // Попытка открыть приложение
+
+                // Если приложение открывается, очистим таймер
+                window.addEventListener('pagehide', () => {
+                    clearTimeout(timeout);
+                });
+            } else {
+                // Если устройство не поддерживается
+                alert('Это устройство не поддерживается. Перенаправление в магазин...');
+                window.location.href = isIOS ? appStoreUrl : playStoreUrl;
             }
-
-            window.location.replace(appSchemeUrl)
-            setTimeout(function() {
-                window.location.href = storeUrl; 
-            }, 1000); 
         }
     </script>
 </body>
