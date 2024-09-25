@@ -3,35 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Открытие приложения</title>
+    <title>Открытие приложения через AppMetrica</title>
 </head>
 <body>
     <h1>Нажмите кнопку, чтобы открыть приложение</h1>
-    <button onclick="openApp()">Открыть приложение 1</button>
+    <button onclick="openApp()">Открыть приложение</button>
 
     <script>
         function openApp() {
-            var userAgent = navigator.userAgent || navigator.vendor || window.opera;
+            // Замените 'YOUR_APPMETRICA_TRACKING_ID' на ваш Tracking ID
+            var appMetricaTrackingId = 'YOUR_APPMETRICA_TRACKING_ID'; 
+            var appLink = `https://redirect.appmetrica.yandex.com/serve/28928038653706999`;
 
-            var appSchemeUrl = 'myapp://etmmobile' 
-            var appStoreUrl = 'https://apps.apple.com/app/id1567907246'
-            var playStoreUrl = 'https://play.google.com/store/apps/details?id=com.ipro.etm'
-
-            var isAndroid = /android/i.test(userAgent)
-            var isiOS = /iPad|iPhone|iPod/.test(userAgent) && !window.MSStream
-
-            var storeUrl
-            if (isiOS) storeUrl = appStoreUrl 
-            else if (isAndroid) storeUrl = playStoreUrl
-            else {
-                alert('Это устройство не поддерживается');
-                return;
-            }
-
-            window.location.replace(appSchemeUrl)
-            /*setTimeout(function() {
-                window.location.href = storeUrl; 
-            }, 1000); */
+            // Открытие ссылки
+            window.location.href = appLink;
         }
     </script>
 </body>
