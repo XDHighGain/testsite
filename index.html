@@ -7,11 +7,12 @@
 </head>
 <body>
     <h1>Нажмите кнопку, чтобы открыть приложение</h1>
-    <button onclick="openApp()">Открыть приложение 444</button>
+    <button onclick="openApp()">Открыть приложение 4441</button>
 
     <script>
         function openApp() {
-            var userAgent = navigator.userAgent || navigator.vendor || window.opera;
+           try {
+             var userAgent = navigator.userAgent || navigator.vendor || window.opera;
 
             var appSchemeUrl = 'myapp://etmmobile' 
             var appStoreUrl = 'https://apps.apple.com/app/id1567907246'
@@ -44,6 +45,10 @@
                 alert('e', e);
                 window.location.href = storeUrl
             }
+           }
+           catch (e) {
+            alert('ee', e);
+           }
         }
     </script>
 </body>
