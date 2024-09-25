@@ -7,50 +7,31 @@
 </head>
 <body>
     <h1>Нажмите кнопку, чтобы открыть приложение</h1>
-    <button onclick="openApp()">Открыть приложение 82</button>
+    <button onclick="openApp()">Открыть приложение 1</button>
 
     <script>
         function openApp() {
-            const appLink = 'myapp://etmmobile'; 
-            const appStoreUrl = 'https://apps.apple.com/app/id1567907246';
-            const playStoreUrl = 'https://play.google.com/store/apps/details?id=com.ipro.etm';
+            var userAgent = navigator.userAgent || navigator.vendor || window.opera;
 
-            const isIOS = /iPhone|iPad|iPod/.test(navigator.userAgent);
-            const isAndroid = /Android/.test(navigator.userAgent);
+            var appSchemeUrl = 'myapp://etmmobile' 
+            var appStoreUrl = 'https://apps.apple.com/app/id1567907246'
+            var playStoreUrl = 'https://play.google.com/store/apps/details?id=com.ipro.etm'
 
-            if (isIOS) {
-                // Для iOS
-                const timeout = setTimeout(() => {
-                    window.location.href = appStoreUrl; // Перенаправление в App Store
-                }, 2000); // Увеличение времени ожидания для улучшения UX
+            var isAndroid = /android/i.test(userAgent)
+            var isiOS = /iPad|iPhone|iPod/.test(userAgent) && !window.MSStream
 
-               try {
-                window.location.href = appLink; // Попытка открыть приложение
-               }
-               catch (e) {
-                alert('e', e)
-               }
-
-                document.addEventListener('visibilitychange', function() {
-                    clearTimeout(timeout); // Очищаем таймер, если приложение открылось
-                });
-            } else if (isAndroid) {
-                // Для Android
-                const timeout = setTimeout(() => {
-                    window.location.href = playStoreUrl; // Перенаправление в Google Play
-                }, 2000); // Увеличение времени ожидания для улучшения UX
-
-                window.location.href = appLink; // Попытка открыть приложение
-
-                document.addEventListener('visibilitychange', function() {
-                    clearTimeout(timeout); // Очищаем таймер, если приложение открылось
-
-                });
-            } else {
-                // Если устройство не поддерживается
-                alert('Это устройство не поддерживается. Перенаправление в магазин...');
-                window.location.href = isIOS ? appStoreUrl : playStoreUrl;
+            var storeUrl
+            if (isiOS) storeUrl = appStoreUrl 
+            else if (isAndroid) storeUrl = playStoreUrl
+            else {
+                alert('Это устройство не поддерживается');
+                return;
             }
+
+            window.location.replace(appSchemeUrl)
+            /*setTimeout(function() {
+                window.location.href = storeUrl; 
+            }, 1000); */
         }
     </script>
 </body>
