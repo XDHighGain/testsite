@@ -7,7 +7,7 @@
 </head>
 <body>
     <h1>Нажмите кнопку, чтобы открыть приложение</h1>
-    <button onclick="openApp()">Открыть приложение 445</button>
+    <button onclick="openApp()">Открыть приложение 55</button>
 
     <script>
         function openApp() {
@@ -21,25 +21,31 @@
             var isiOS = /iPad|iPhone|iPod/.test(userAgent) && !window.MSStream;
 
             if (isiOS || isAndroid) {
-                // Открываем приложение с задержкой
-                setTimeout(function() {
-                    // Попытка открыть приложение
-                    window.location.href = appSchemeUrl;
-                }, 100); // Задержка 100 мс
+                // Таймер для ожидания
+                var redirectTimeout;
 
-                // Таймер для ожидания перехода в магазин
-                var redirectTimeout = setTimeout(function() {
+                // Функция для перенаправления в магазин
+                function redirectToStore() {
                     if (isiOS) {
                         window.location.href = appStoreUrl;
                     } else {
                         window.location.href = playStoreUrl;
                     }
-                }, 2000); // Задержка 2 секунды
+                }
+
+                // Устанавливаем таймер перенаправления
+                redirectTimeout = setTimeout(redirectToStore, 2000); // Задержка 2 секунды
+
+                // Попытка открыть приложение
+                window.location.href = appSchemeUrl;
 
                 // Отслеживаем изменение видимости документа
                 document.addEventListener('visibilitychange', function onVisibilityChange() {
                     if (document.visibilityState === 'hidden') {
                         // Если приложение открылось, очищаем таймер
+                        clearTimeout(redirectTimeout);
+                    } else {
+                        // Если пользователь отменил действие, очищаем таймер
                         clearTimeout(redirectTimeout);
                     }
                 });
