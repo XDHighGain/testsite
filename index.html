@@ -7,7 +7,7 @@
 </head>
 <body>
     <h1>Нажмите кнопку, чтобы открыть приложение</h1>
-    <button onclick="openApp()">Открыть приложение 11</button>
+    <button onclick="openApp()">Открыть приложение 33</button>
 
     <script>
         function openApp() {
@@ -21,11 +21,8 @@
             var isiOS = /iPad|iPhone|iPod/.test(userAgent) && !window.MSStream;
 
             if (isiOS || isAndroid) {
-                // Создаем скрытый iframe для открытия приложения
-                var iframe = document.createElement('iframe');
-                iframe.style.display = 'none';
-                iframe.src = appSchemeUrl;
-                document.body.appendChild(iframe);
+                // Попытка открыть приложение
+                window.location.href = appSchemeUrl;
 
                 // Таймер для ожидания
                 var timeout = setTimeout(function() {
