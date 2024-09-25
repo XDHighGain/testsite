@@ -7,43 +7,39 @@
 </head>
 <body>
     <h1>Нажмите кнопку, чтобы открыть приложение</h1>
-    <button onclick="openApp()">Открыть приложение 8</button>
+    <button onclick="openApp()">Открыть приложение 81</button>
 
     <script>
         function openApp() {
-            var userAgent = navigator.userAgent || navigator.vendor || window.opera;
+            const appLink = 'myapp://etmmobile'; 
+            const appStoreUrl = 'https://apps.apple.com/app/id1567907246';
+            const playStoreUrl = 'https://play.google.com/store/apps/details?id=com.ipro.etm';
 
-            var appLink = 'myapp://etmmobile' 
-            var appStoreUrl = 'https://apps.apple.com/app/id1567907246'
-            var playStoreUrl = 'https://play.google.com/store/apps/details?id=com.ipro.etm'
-
-             // Проверка на iOS и Android
-             const isIOS = /iPhone|iPad|iPod/.test(navigator.userAgent);
+            const isIOS = /iPhone|iPad|iPod/.test(navigator.userAgent);
             const isAndroid = /Android/.test(navigator.userAgent);
 
             if (isIOS) {
                 // Для iOS
                 const timeout = setTimeout(() => {
                     window.location.href = appStoreUrl; // Перенаправление в App Store
-                }, 500); // Задержка перед редиректом
+                }, 2000); // Увеличение времени ожидания для улучшения UX
 
                 window.location.href = appLink; // Попытка открыть приложение
 
-                // Если приложение открывается, очистим таймер
-                window.addEventListener('pagehide', () => {
-                    clearTimeout(timeout);
+                document.addEventListener('visibilitychange', function() {
+                    clearTimeout(timeout); // Очищаем таймер, если приложение открылось
                 });
             } else if (isAndroid) {
                 // Для Android
                 const timeout = setTimeout(() => {
                     window.location.href = playStoreUrl; // Перенаправление в Google Play
-                }, 500); // Задержка перед редиректом
+                }, 2000); // Увеличение времени ожидания для улучшения UX
 
                 window.location.href = appLink; // Попытка открыть приложение
 
-                // Если приложение открывается, очистим таймер
-                window.addEventListener('pagehide', () => {
-                    clearTimeout(timeout);
+                document.addEventListener('visibilitychange', function() {
+                    clearTimeout(timeout); // Очищаем таймер, если приложение открылось
+
                 });
             } else {
                 // Если устройство не поддерживается
