@@ -7,7 +7,7 @@
 </head>
 <body>
     <h1>Нажмите кнопку, чтобы открыть приложение</h1>
-    <button onclick="openApp()">Открыть приложение 33</button>
+    <button onclick="openApp()">Открыть приложение 44</button>
 
     <script>
         function openApp() {
@@ -21,27 +21,32 @@
             var isiOS = /iPad|iPhone|iPod/.test(userAgent) && !window.MSStream;
 
             if (isiOS || isAndroid) {
-                // Попытка открыть приложение
-                window.location.href = appSchemeUrl;
-
                 // Таймер для ожидания
                 var timeout = setTimeout(function() {
-                    // Если приложение не открылось, перенаправляем в соответствующий магазин
-                    if (isiOS) {
-                        window.location.href = appStoreUrl;
-                    } else {
-                        window.location.href = playStoreUrl;
-                    }
-                }, 2000); // Задержка 2 секунды
+                    // Попытка открыть приложение
+                    window.location.href = appSchemeUrl;
 
-                // Отслеживаем изменение видимости документа
-                document.addEventListener('visibilitychange', function onVisibilityChange() {
-                    if (document.visibilityState === 'hidden') {
-                        // Если приложение открылось, очищаем таймер
-                        clearTimeout(timeout);
-                        document.removeEventListener('visibilitychange', onVisibilityChange);
-                    }
-                });
+                    // Устанавливаем задержку на перенаправление в магазин
+                    var redirectTimeout = setTimeout(function() {
+                        // Если приложение не открылось, перенаправляем в соответствующий магазин
+                        if (isiOS) {
+                            window.location.href = appStoreUrl;
+                        } else {
+                            window.location.href = playStoreUrl;
+                        }
+                    }, 2000); // Задержка 2 секунды
+
+                    // Отслеживаем изменение видимости документа
+                    document.addEventListener('visibilitychange', function onVisibilityChange() {
+                        if (document.visibilityState === 'hidden') {
+                            // Если приложение открылось, очищаем таймер
+                            clearTimeout(redirectTimeout);
+                        } else {
+                            // Если пользователь отменил действие, очищаем таймер
+                            clearTimeout(redirectTimeout);
+                        }
+                    });
+                }, 100); // Задержка 100 мс перед открытием приложения
             } else {
                 alert('Это устройство не поддерживается');
             }
