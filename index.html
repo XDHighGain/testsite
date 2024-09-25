@@ -3,44 +3,57 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Открытие приложения</title>
+    <title>Открытие приложения 1</title>
 </head>
 <body>
     <h1>Нажмите кнопку, чтобы открыть приложение</h1>
-    <button onclick="openApp()">Открыть приложение 4443</button>
+    <button onclick="openApp()">Открыть приложение</button>
 
     <script>
         function openApp() {
+            var userAgent = navigator.userAgent || navigator.vendor || window.opera;
 
-             var userAgent = navigator.userAgent || navigator.vendor || window.opera;
+            var appSchemeUrl = 'myapp://etmmobile'; 
+            var appStoreUrl = 'https://apps.apple.com/app/id1567907246';
+            var playStoreUrl = 'https://play.google.com/store/apps/details?id=com.ipro.etm';
 
-            var appSchemeUrl = 'myapp://etmmobile' 
-            var appStoreUrl = 'https://apps.apple.com/app/id1567907246'
-            var playStoreUrl = 'https://play.google.com/store/apps/details?id=com.ipro.etm'
+            var isAndroid = /android/i.test(userAgent);
+            var isiOS = /iPad|iPhone|iPod/.test(userAgent) && !window.MSStream;
 
-            var isAndroid = /android/i.test(userAgent)
-            var isiOS = /iPad|iPhone|iPod/.test(userAgent) && !window.MSStream
+            if (isiOS) {
+                // Попытка открыть универсальную ссылку
+                window.location.href = appSchemeUrl;
 
-            var storeUrl
-            if (isiOS) storeUrl = appStoreUrl 
-            else if (isAndroid) storeUrl = playStoreUrl
-            else {
+                // Отслеживаем изменение видимости документа
+                document.addEventListener('visibilitychange', function onVisibilityChange() {
+                    if (document.visibilityState === 'hidden') {
+                        // Если приложение открылось, ничего не делаем
+                        document.removeEventListener('visibilitychange', onVisibilityChange);
+                    } else {
+                        // Если приложение не открылось, перенаправляем в App Store
+                        window.location.href = appStoreUrl;
+                        document.removeEventListener('visibilitychange', onVisibilityChange);
+                    }
+                });
+            } else if (isAndroid) {
+                // Попытка открыть приложение по URL-схеме
+                window.location.href = appSchemeUrl;
+
+                // Отслеживаем изменение видимости документа
+                document.addEventListener('visibilitychange', function onVisibilityChange() {
+                    if (document.visibilityState === 'hidden') {
+                        // Если приложение открылось, ничего не делаем
+                        document.removeEventListener('visibilitychange', onVisibilityChange);
+                    } else {
+                        // Если приложение не открылось, перенаправляем в Play Store
+                        window.location.href = playStoreUrl;
+                        document.removeEventListener('visibilitychange', onVisibilityChange);
+                    }
+                });
+            } else {
                 alert('Это устройство не поддерживается');
-                return;
             }
-
-            /*var iframe = document.createElement('iframe');
-            iframe.style.display = 'none';
-            iframe.src = appSchemeUrl;
-            document.body.appendChild(iframe);*/
-            window.location.replace(appSchemeUrl)
-            setTimeout(function() {
-                //document.body.removeChild(iframe); 
-                window.location.href = storeUrl; 
-            }, 1000); 
-           }
-
-        
+        }
     </script>
 </body>
 </html>
