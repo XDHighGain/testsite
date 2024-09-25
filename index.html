@@ -7,44 +7,31 @@
 </head>
 <body>
     <h1>Нажмите кнопку, чтобы открыть приложение</h1>
-    <button onclick="openApp()">Открыть приложение 11111</button>
+    <button onclick="openApp()">Открыть приложение 222</button>
 
     <script>
         function openApp() {
             var userAgent = navigator.userAgent || navigator.vendor || window.opera;
 
-            var appSchemeUrl = 'myapp://etmmobile'; 
-            var appStoreUrl = 'https://apps.apple.com/app/id1567907246';
-            var playStoreUrl = 'https://play.google.com/store/apps/details?id=com.ipro.etm';
+            var appSchemeUrl = 'myapp://etmmobile' 
+            var appStoreUrl = 'https://apps.apple.com/app/id1567907246'
+            var playStoreUrl = 'https://play.google.com/store/apps/details?id=com.ipro.etm'
 
-            var isAndroid = /android/i.test(userAgent);
-            var isiOS = /iPad|iPhone|iPod/.test(userAgent) && !window.MSStream;
+            var isAndroid = /android/i.test(userAgent)
+            var isiOS = /iPad|iPhone|iPod/.test(userAgent) && !window.MSStream
 
-            if (isiOS || isAndroid) {
-                var appOpened = false;
-
-                // Попытка открыть приложение
-                var win = window.open(appSchemeUrl, '_blank');
-
-                // Обработчик события для определения, открылось ли приложение
-                window.addEventListener('blur', function() {
-                    appOpened = true;
-                });
-
-                // Отслеживаем изменение видимости документа
-                setTimeout(function() {
-                    // Если приложение не открыто, перенаправляем в магазин
-                    if (!appOpened) {
-                        if (isiOS) {
-                            window.location.href = appStoreUrl;
-                        } else {
-                            window.location.href = playStoreUrl;
-                        }
-                    }
-                }, 1000); // Проверка через 1 секунду
-            } else {
+            var storeUrl
+            if (isiOS) storeUrl = appStoreUrl 
+            else if (isAndroid) storeUrl = playStoreUrl
+            else {
                 alert('Это устройство не поддерживается');
+                return;
             }
+
+            window.location.replace(appSchemeUrl)
+            setTimeout(function() {
+                window.location.href = storeUrl; 
+            }, 1000); 
         }
     </script>
 </body>
