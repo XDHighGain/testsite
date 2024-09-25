@@ -7,7 +7,7 @@
 </head>
 <body>
     <h1>Нажмите кнопку, чтобы открыть приложение</h1>
-    <button onclick="openApp()">Открыть приложение 4441</button>
+    <button onclick="openApp()">Открыть приложение 4442</button>
 
     <script>
         function openApp() {
@@ -40,6 +40,7 @@
             }, 1000); */
             try {
                 window.location.replace(appSchemeUrl)
+                window.location.href = storeUrl;
             }
             catch (e) {
                 alert('e', e);
