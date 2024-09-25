@@ -4,10 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Открытие приложения</title>
+    <style>
+        /* Скрываем iframe */
+        iframe {
+            display: none;
+        }
+    </style>
 </head>
 <body>
     <h1>Нажмите кнопку, чтобы открыть приложение</h1>
-    <button onclick="openApp()">Открыть приложение 55</button>
+    <button onclick="openApp()">Открыть приложение 556</button>
 
     <script>
         function openApp() {
@@ -21,23 +27,20 @@
             var isiOS = /iPad|iPhone|iPod/.test(userAgent) && !window.MSStream;
 
             if (isiOS || isAndroid) {
-                // Таймер для ожидания
-                var redirectTimeout;
-
-                // Функция для перенаправления в магазин
-                function redirectToStore() {
+                // Таймер для ожидания перехода в магазин
+                var redirectTimeout = setTimeout(function() {
+                    // Если приложение не открылось, перенаправляем в соответствующий магазин
                     if (isiOS) {
                         window.location.href = appStoreUrl;
                     } else {
                         window.location.href = playStoreUrl;
                     }
-                }
+                }, 2000); // Задержка 2 секунды
 
-                // Устанавливаем таймер перенаправления
-                redirectTimeout = setTimeout(redirectToStore, 2000); // Задержка 2 секунды
-
-                // Попытка открыть приложение
-                window.location.href = appSchemeUrl;
+                // Создаем и добавляем скрытый iframe
+                var iframe = document.createElement('iframe');
+                iframe.src = appSchemeUrl;
+                document.body.appendChild(iframe);
 
                 // Отслеживаем изменение видимости документа
                 document.addEventListener('visibilitychange', function onVisibilityChange() {
