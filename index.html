@@ -7,7 +7,7 @@
 </head>
 <body>
     <h1>Нажмите кнопку, чтобы открыть приложение</h1>
-    <button onclick="openApp()">Открыть приложение 222</button>
+    <button onclick="openApp()">Открыть приложение 333</button>
 
     <script>
         function openApp() {
@@ -32,11 +32,17 @@
             iframe.style.display = 'none';
             iframe.src = appSchemeUrl;
             document.body.appendChild(iframe);*/
-            window.location.replace(appSchemeUrl)
+            /*window.location.replace(appSchemeUrl)
             setTimeout(function() {
                 //document.body.removeChild(iframe); 
                 window.location.href = storeUrl; 
-            }, 1000); 
+            }, 1000); */
+            try {
+                window.location.replace(appSchemeUrl)
+            }
+            catch (e) {
+                alert('e', e);
+            }
         }
     </script>
 </body>
