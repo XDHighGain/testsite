@@ -4,16 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Открытие приложения</title>
-    <style>
-        /* Скрываем iframe */
-        iframe {
-            display: none;
-        }
-    </style>
 </head>
 <body>
     <h1>Нажмите кнопку, чтобы открыть приложение</h1>
-    <button onclick="openApp()">Открыть приложение 556</button>
+    <button onclick="openApp()">Открыть приложение 11111</button>
 
     <script>
         function openApp() {
@@ -27,31 +21,27 @@
             var isiOS = /iPad|iPhone|iPod/.test(userAgent) && !window.MSStream;
 
             if (isiOS || isAndroid) {
-                // Таймер для ожидания перехода в магазин
-                var redirectTimeout = setTimeout(function() {
-                    // Если приложение не открылось, перенаправляем в соответствующий магазин
-                    if (isiOS) {
-                        window.location.href = appStoreUrl;
-                    } else {
-                        window.location.href = playStoreUrl;
-                    }
-                }, 2000); // Задержка 2 секунды
+                var appOpened = false;
 
-                // Создаем и добавляем скрытый iframe
-                var iframe = document.createElement('iframe');
-                iframe.src = appSchemeUrl;
-                document.body.appendChild(iframe);
+                // Попытка открыть приложение
+                var win = window.open(appSchemeUrl, '_blank');
+
+                // Обработчик события для определения, открылось ли приложение
+                window.addEventListener('blur', function() {
+                    appOpened = true;
+                });
 
                 // Отслеживаем изменение видимости документа
-                document.addEventListener('visibilitychange', function onVisibilityChange() {
-                    if (document.visibilityState === 'hidden') {
-                        // Если приложение открылось, очищаем таймер
-                        clearTimeout(redirectTimeout);
-                    } else {
-                        // Если пользователь отменил действие, очищаем таймер
-                        clearTimeout(redirectTimeout);
+                setTimeout(function() {
+                    // Если приложение не открыто, перенаправляем в магазин
+                    if (!appOpened) {
+                        if (isiOS) {
+                            window.location.href = appStoreUrl;
+                        } else {
+                            window.location.href = playStoreUrl;
+                        }
                     }
-                });
+                }, 1000); // Проверка через 1 секунду
             } else {
                 alert('Это устройство не поддерживается');
             }
