@@ -7,11 +7,11 @@
 </head>
 <body>
     <h1>Нажмите кнопку, чтобы открыть приложение</h1>
-    <button onclick="openApp()">Открыть приложение 4442</button>
+    <button onclick="openApp()">Открыть приложение 4443</button>
 
     <script>
         function openApp() {
-           try {
+
              var userAgent = navigator.userAgent || navigator.vendor || window.opera;
 
             var appSchemeUrl = 'myapp://etmmobile' 
@@ -33,24 +33,14 @@
             iframe.style.display = 'none';
             iframe.src = appSchemeUrl;
             document.body.appendChild(iframe);*/
-            /*window.location.replace(appSchemeUrl)
+            window.location.replace(appSchemeUrl)
             setTimeout(function() {
                 //document.body.removeChild(iframe); 
                 window.location.href = storeUrl; 
-            }, 1000); */
-            try {
-                window.location.replace(appSchemeUrl)
-                window.location.href = storeUrl;
-            }
-            catch (e) {
-                alert('e', e);
-                window.location.href = storeUrl
-            }
+            }, 1000); 
            }
-           catch (e) {
-            alert('ee', e);
-           }
-        }
+
+        
     </script>
 </body>
 </html>
