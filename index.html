@@ -9,6 +9,7 @@
     <h1>Нажмите кнопку, чтобы открыть приложение</h1>
     <button onclick="openApp()">Открыть приложение1</button>
     <button onclick="openApp()">Открыть приложение2</button>
+    <button onclick="openApp()">Открыть приложение3</button>
     <script>
         function openApp() {
             var appLink = `https://redirect.appmetrica.yandex.com/serve/28928038653706999`;
@@ -17,6 +18,11 @@
         }
         function openApp2() {
             var appLink = `https://3855082.redirect.appmetrica.yandex.com/etmmobile?appmetrica_tracking_id=28928038653706999`;
+
+            window.location.href = appLink;
+        }
+        function openApp3() {
+            var appLink = `applinks:3855082.redirect.appmetrica.yandex.com`;
 
             window.location.href = appLink;
         }
