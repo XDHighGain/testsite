@@ -7,17 +7,60 @@
 </head>
 <body>
     <h1>Нажмите кнопку, чтобы открыть приложение</h1>
-    <button onclick="openApp()">Открыть приложение</button>
-
+    <button onclick="openApp()">Открыть приложение1</button>
+    <button onclick="openApp()">Открыть приложение2</button>
     <script>
         function openApp() {
-            // Замените 'YOUR_APPMETRICA_TRACKING_ID' на ваш Tracking ID
-            var appMetricaTrackingId = 'YOUR_APPMETRICA_TRACKING_ID'; 
             var appLink = `https://redirect.appmetrica.yandex.com/serve/28928038653706999`;
 
-            // Открытие ссылки
+            window.location.href = appLink;
+        }
+        function openApp2() {
+            var appLink = `https://3855082.redirect.appmetrica.yandex.com/etmmobile?appmetrica_tracking_id=28928038653706999`;
+
             window.location.href = appLink;
         }
     </script>
 </body>
 </html>
+
+<!-- 
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Открытие приложения</title>
+</head>
+<body>
+    <h1>Нажмите кнопку, чтобы открыть приложение</h1>
+    <button onclick="openApp()">Открыть приложение 222</button>
+
+    <script>
+        function openApp() {
+            var userAgent = navigator.userAgent || navigator.vendor || window.opera;
+
+            var appSchemeUrl = 'myapp://etmmobile' 
+            var appStoreUrl = 'https://apps.apple.com/app/id1567907246'
+            var playStoreUrl = 'https://play.google.com/store/apps/details?id=com.ipro.etm'
+
+            var isAndroid = /android/i.test(userAgent)
+            var isiOS = /iPad|iPhone|iPod/.test(userAgent) && !window.MSStream
+
+            var storeUrl
+            if (isiOS) storeUrl = appStoreUrl 
+            else if (isAndroid) storeUrl = playStoreUrl
+            else {
+                alert('Это устройство не поддерживается');
+                return;
+            }
+
+            window.location.replace(appSchemeUrl)
+            setTimeout(function() {
+                window.location.href = storeUrl; 
+            }, 1000); 
+        }
+    </script>
+</body>
+</html>
+-->
