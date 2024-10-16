@@ -1,0 +1,11 @@
+{
+  "webcredentials": {
+    "apps": ["C3TXH76XZ6.com.ipro.etm.App"],
+    "details": [
+      {
+        "appID": "C3TXH76XZ6.com.ipro.etm.App",
+        "paths": ["*"]
+      }
+    ]
+  }
+}
